@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Customer(models.Model):
-    user = models.OnetoOneField(User,on_delete=models.CASCADE,null=True, blank=True)
+    user = models.OneToOneField(User,on_delete=models.CASCADE,null=True, blank=True)
     name = models.CharField(max_length=200,null=True)
     email = models.CharField(max_length=200, null=True)
 
@@ -36,9 +36,18 @@ class Order(models.Model):
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
-    quantity = models.IntergerField(default=0, null=True, blank=True)
-    date_added = models.DateTimeField(auto_no_add=True)
+    quantity = models.IntegerField(default=0, null=True, blank=True)
+    date_added = models.DateTimeField(auto_now_add=True)
 
 
 class ShippingAddress(models.Model):
-    customer = models.ForeignKey(Customer,on_delete=models.CASCADE,null=True)
+    customer = models.ForeignKey(Customer,on_delete=models.SET_NULL,blank=True,null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL,blank=True,null=True)
+    address = models.CharField(max_length=200, null=False)
+    city = models.CharField(max_length=200,null=False)
+    state = models.CharField(max_length=200, null=False)
+    zipcode = models.CharField(max_length=200, null=False)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.address)
