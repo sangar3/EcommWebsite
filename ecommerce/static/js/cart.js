@@ -27,4 +27,23 @@ function updateUserOrder(productId,action)
     console.log('User is Logged in, sending Data..')
 
     var url = '/update_item/'
+
+
+    fetch(url,{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({'productId': productId, 'action':action})
+    })
+
+
+    .then((response) => {
+        return response.json()
+    })
+
+     .then((data) => {
+        console.log('date:',data)
+    })
+
 }
