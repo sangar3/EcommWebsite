@@ -57,9 +57,9 @@
                 {% for item in items %}
                     <div class="cart-row">
                         <div style="flex: 2"><img class="row-image" src="{{item.product.imageURL}}" alt=""></div>
-                        <div style="flex: 2"><p>Product 1</p></div>
-                        <div style="flex: 1"><p>$20.00</p></div>
-                        <div style="flex: 2"><p>2</p></div>
+                        <div style="flex: 2"><p>{{item.product.name}}</p></div>
+                        <div style="flex: 1"><p>{{item.product.price}}</p></div>
+                        <div style="flex: 2"><p>{{item.product.quantity}}</p></div>
                     </div>
                 {% endfor %}
                 <h5>Items:  {{order.get_cart_items}}</h5>
@@ -67,5 +67,21 @@
             </div>
         </div>
     </div>
+<script type="text/javascript">
+    var shipping = '{{order.shipping}}'
 
+    if(shipping == 'False'){
+        document.getElementById('shipping-info').innerHTML =''
+    }
+
+    var form = document.getElementById('form')
+
+    form.addEventListener('submit', function (e){
+        e.preventDefault()
+        console.log('Form Submitted...')
+        document.getElementById('form-button').classList.add('hidden')
+        document.getElementById('payment-info').classList.remove('hidden')
+    })
+
+</script>
 {% endblock content %}
