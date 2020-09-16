@@ -10,9 +10,9 @@ for (i=0;i < updateBtns.length; i++)
         var action = this.dataset.action
         console.log('proudctId;', productId, 'Action:', action)
         console.log('USER:', user)
-        if(user=== 'AnonoymouseUser' )
+        if(user === 'AnonymousUser' )
         {
-            console.log('Not Logged In')
+            addCookieItem()
         }
         else
         {
@@ -21,10 +21,17 @@ for (i=0;i < updateBtns.length; i++)
     })
 }
 
+function addCookieItem(productId, action){
+
+    console.log('Not logged in..')
+}
+
+
 
 function updateUserOrder(productId,action)
 {
-    console.log('User is Logged in, sending Data..')
+
+    console.log('Not logged in')
 
     var url = '/update_item/'
 
