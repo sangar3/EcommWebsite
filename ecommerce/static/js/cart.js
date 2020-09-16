@@ -12,7 +12,7 @@ for (i=0;i < updateBtns.length; i++)
         console.log('USER:', user)
         if(user === 'AnonymousUser' )
         {
-            addCookieItem()
+            addCookieItem(productId, action)
         }
         else
         {
