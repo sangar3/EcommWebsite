@@ -28,9 +28,16 @@ def cart(request):
         cartItems = order.get_cart_items
     else:
         # create empty cart  for none-logged in users
+        try:
+            cart = json.loads(request.COOKIES['cart'])
+        except:
+            cart = {}
+        print('Cart:', cart)
         items = []
         order = {'get_cart_total':0, 'get_cart_items':0 , 'shipping':False}
         cartItems = order['get_cart_items']
+        for i in cart:
+            cartItems += cart[i]['quantity']
 
 
     context = {'items':items,'order':order, 'cartItems':cartItems}
